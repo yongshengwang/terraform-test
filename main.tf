@@ -11,11 +11,12 @@ terraform {
 
 provider "aws" {
   region  = "us-east-2"
-  access_key = "AKIA3EYUCAV74AWAH3CB"
-  secret_key = "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"
+
 }
-resource "aws_instance" "web_server" {
-  ami = "ami-02d1e544b84bf7502"
-  instance_type = "t2.micro"
-  tags = {name="test"}
+
+module "instance" {
+  source = "./modules/ec2"
+  enable_ec2 = true
+  enable_s3 = true
+  bucket_name = "tiny-test-1986"
 }
